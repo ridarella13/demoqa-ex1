@@ -2,6 +2,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pages.StudentPage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -31,7 +32,6 @@ public class StudentFormTest {
         String state = "Haryana";
         String city = "Karnal";
 
-
         Selenide.open("https://demoqa.com/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
         executeJavaScript("$('footer').remove()");
@@ -41,7 +41,7 @@ public class StudentFormTest {
         $("#userEmail").setValue(email);
         $("#genterWrapper").$(byText(gender)).click();
         $("#userNumber").setValue(phone);
-        $("#dateOfBirth-wrapper").click();
+        $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").selectOption(birthDateMonth);
         $(".react-datepicker__year-select").selectOption(birthDateYear);
         $(".react-datepicker__day--011:not(.react-datepicker__day--outside-month)").click();

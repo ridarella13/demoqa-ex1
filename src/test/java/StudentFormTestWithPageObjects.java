@@ -1,18 +1,14 @@
 import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import pages.StudentPage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class StudentFormTest {
+public class StudentFormTestWithPageObjects extends TestBase {
 
-    @BeforeAll
-    static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
-    }
 
     @Test
     void studentFormTest() {
@@ -31,20 +27,16 @@ public class StudentFormTest {
         String state = "Haryana";
         String city = "Karnal";
 
+        studentPage.openPage()
+                .setFirstName(nameFirst)
+                .setLastName(nameLast)
+                .setUserEmail(email)
+                .setGender(gender)
+                .setPhone(phone)
+                .setBirthDate("11", "November", "2000");
 
-        Selenide.open("https://demoqa.com/automation-practice-form");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
-        $(".main-header").shouldHave(text("Practice Form"));
-        $("#firstName").setValue(nameFirst);
-        $("#lastName").setValue(nameLast);
-        $("#userEmail").setValue(email);
-        $("#genterWrapper").$(byText(gender)).click();
-        $("#userNumber").setValue(phone);
-        $("#dateOfBirth-wrapper").click();
-        $(".react-datepicker__month-select").selectOption(birthDateMonth);
-        $(".react-datepicker__year-select").selectOption(birthDateYear);
-        $(".react-datepicker__day--011:not(.react-datepicker__day--outside-month)").click();
+
+
         $("#subjectsInput").setValue(subjects).pressTab();
         $("#hobbiesWrapper").$(byText(hobby)).click();
         $("#uploadPicture").uploadFromClasspath("images/" + img);
@@ -56,8 +48,7 @@ public class StudentFormTest {
         $(byText("Submit")).click();
 
 
-        $(".modal-content").should(appear);
-        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
+        studentPage.verifyResaltsModalAppears();
         $$(".table-responsive tr").findBy(text("Student Name" + " " + nameFirst + " " + nameLast)).shouldBe(visible);
         $$(".table-responsive tr").findBy(text("Student Email" + " " + email)).shouldBe(visible);
         $$(".table-responsive tr").findBy(text("Gender" + " " + gender)).shouldBe(visible);
