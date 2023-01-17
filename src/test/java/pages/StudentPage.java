@@ -17,8 +17,7 @@ public class StudentPage {
     private final String TITLE_TEXT = "Practice Form";
     private SelenideElement
             firstnNameInput = $("#firstName"),
-            lastNameInput = $("#lastName"),
-            userEmailInput = $("userEmail");
+            lastNameInput = $("#lastName");
 
     public StudentPage openPage() {
         Selenide.open("https://demoqa.com/automation-practice-form");
@@ -28,7 +27,6 @@ public class StudentPage {
 
         return this;
     }
-
 
     public StudentPage setFirstName(String value) {
         firstnNameInput.setValue(value);
@@ -43,7 +41,7 @@ public class StudentPage {
     }
 
     public StudentPage setUserEmail(String value) {
-        userEmailInput.setValue(value);
+        $("#userEmail").setValue(value);
 
         return this;
     }
@@ -67,13 +65,59 @@ public class StudentPage {
         return this;
     }
 
-    public StudentPage verifyResaltsModalAppears() {
+    public StudentPage setSubjects(String value) {
+        $("#subjectsInput").setValue(value).pressTab();
+
+        return this;
+    }
+
+    public StudentPage setHobbies(String value) {
+        $("#hobbiesWrapper").$(byText(value)).click();
+
+        return this;
+    }
+
+    public StudentPage uploadPicture(String value) {
+        $("#uploadPicture").uploadFromClasspath("images/" + value);
+
+        return this;
+    }
+
+    public StudentPage setcurrentAddress(String value) {
+        $("#currentAddress").setValue(value);
+
+        return this;
+    }
+
+    public StudentPage setState(String value) {
+        $(byText("Select State")).click();
+        $(byText(value)).click();
+
+        return this;
+    }
+
+    public StudentPage setCity(String value) {
+        $(byText("Select City")).click();
+        $(byText(value)).click();
+
+        return this;
+    }
+
+    public StudentPage clickSubmitButton(String value) {
+        $(byText(value)).click();
+
+        return this;
+    }
+
+    public StudentPage verifyResultsModalAppears() {
         registrationResultModal.verifyModalAppears();
 
         return this;
     }
-    public StudentPage verifyResaltsModalAppears() {
-        registrationResultModal.verifyModalAppears();
+
+    public StudentPage verifyResults(String key, String value) {
+        registrationResultModal.verifyResult(key, value);
 
         return this;
+    }
 }
