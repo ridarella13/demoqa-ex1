@@ -27,7 +27,7 @@ public class StudentFormTest {
         String currentAddress = "currentAddress";
         String birthDateYear = "2000";
         String birthDateMonth = "November";
-        String hobby = "Music";
+        String hobby = "Music+";
         String img = "cat.jpg";
         String state = "Haryana";
         String city = "Karnal";
