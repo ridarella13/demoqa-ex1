@@ -27,6 +27,7 @@ public class StudentFormTest {
         String currentAddress = "currentAddress";
         String birthDateYear = "2000";
         String birthDateMonth = "November";
+        String birthDate = "11";
         String hobby = "Music+";
         String img = "cat.jpg";
         String state = "Haryana";
@@ -62,7 +63,7 @@ public class StudentFormTest {
         $$(".table-responsive tr").findBy(text("Student Email" + " " + email)).shouldBe(visible);
         $$(".table-responsive tr").findBy(text("Gender" + " " + gender)).shouldBe(visible);
         $$(".table-responsive tr").findBy(text("Mobile" + " " + phone)).shouldBe(visible);
-        $$(".table-responsive tr").findBy(text("Date of Birth" + " " + "11" + " " + birthDateMonth + "," + birthDateYear)).shouldBe(visible);
+        $$(".table-responsive tr").findBy(text("Date of Birth" + " " + birthDate + " " + birthDateMonth + "," + birthDateYear)).shouldBe(visible);
         $$(".table-responsive tr").findBy(text("Hobbies" + " " + hobby)).shouldBe(visible);
         $$(".table-responsive tr").findBy(text("Picture" + " " + img)).shouldBe(visible);
         $$(".table-responsive tr").findBy(text("Address" + " " + currentAddress)).shouldBe(visible);
