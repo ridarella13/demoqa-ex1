@@ -2,7 +2,6 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import static com.codeborne.selenide.Selenide.sleep;
 
 
 public class StudentFormTestWithRandomData extends TestBase {
@@ -10,7 +9,7 @@ public class StudentFormTestWithRandomData extends TestBase {
     @Test
     void studentFormTest() {
 
-        Faker faker = new Faker(new Locale("en"));
+        Faker faker = new Faker(new Locale("US"));
         String nameFirst = faker.name().firstName(),
                 nameLast = faker.name().lastName(),
                 email = faker.internet().emailAddress(),
@@ -23,9 +22,8 @@ public class StudentFormTestWithRandomData extends TestBase {
                 birthDateYear = new SimpleDateFormat("yyyy", Locale.US).format(faker.date().birthday()),
                 birthDateMonth = new SimpleDateFormat("MMMM", Locale.US).format(faker.date().birthday()),
                 birthDate = new SimpleDateFormat("d", Locale.US).format(faker.date().birthday()),
-//                birthDate =  new SimpleDateFormat("d MMM yyyy", Locale.US).format(faker.date().birthday()),
-                state = "Rajasthan",
-                city = faker.options().option("Jaipur","Jaiselmer");
+                state = faker.options().option("Haryana"),
+                city = faker.options().option("Karnal","Panipat");
 
 
         studentPage.openPage()
@@ -43,7 +41,6 @@ public class StudentFormTestWithRandomData extends TestBase {
                 .setCity(city)
                 .clickSubmitButton("Submit");
 
-        sleep(10000);
 
 
         studentPage.verifyResultsModalAppears()
