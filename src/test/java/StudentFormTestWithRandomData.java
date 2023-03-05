@@ -1,4 +1,6 @@
 import com.github.javafaker.Faker;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -7,6 +9,8 @@ import java.util.Locale;
 public class StudentFormTestWithRandomData extends TestBase {
 
     @Test
+    @Tag("smoke")
+    @DisplayName("Проверка заполнения формы регистрации")
     void studentFormTest() {
 
         Faker faker = new Faker(new Locale("US"));

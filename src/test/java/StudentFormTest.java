@@ -5,6 +5,7 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 
 import static com.codeborne.selenide.Condition.*;
@@ -15,7 +16,15 @@ public class StudentFormTest {
 
     @BeforeAll
     static void beforeAll() {
-        Configuration.browserSize = "1920x1080";
+        Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
+        Configuration.browserVersion = System.getProperty("browserVersion", "100.0");
+        Configuration.browser = System.getProperty("BrowserName", "chrome");
+        Configuration.baseUrl = "https://demoqa.com";
+        Configuration.remote = System.getProperty("remoteURL");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVideo", true);
+        Configuration.browserCapabilities = capabilities;
     }
     @BeforeEach
     void addListener() {
