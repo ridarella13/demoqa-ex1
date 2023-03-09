@@ -35,4 +35,30 @@ allure {
 test {
     useJUnitPlatform()
 }
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+task smoke_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags("smoke")
+    }
+}
+
+task regress(type: Test) {
+    useJUnitPlatform {
+        includeTags("regress")
+    }
+}
