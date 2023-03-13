@@ -1,10 +1,14 @@
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 
@@ -48,6 +52,11 @@ public class StudentFormTest {
         String img = "cat.jpg";
         String state = "Haryana";
         String city = "Karnal";
+
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(chromeOptions);
+        WebDriverRunner.setWebDriver(driver);
 
         Selenide.open("https://demoqa.com/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
