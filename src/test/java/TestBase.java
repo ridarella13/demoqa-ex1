@@ -18,10 +18,6 @@ public class TestBase {
 
     @BeforeAll
     static void beforeAll() {
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--remote-allow-origins=*");
-        WebDriver driver = new ChromeDriver(chromeOptions);
-        WebDriverRunner.setWebDriver(driver);
         Configuration.browserSize = System.getProperty("browserSize", "1920x1080");
         Configuration.browserVersion = System.getProperty("browserVersion", "100.0");
         Configuration.browser = System.getProperty("BrowserName", "chrome");
